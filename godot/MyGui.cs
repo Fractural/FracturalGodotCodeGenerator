@@ -1,94 +1,96 @@
+using Fractural.GodotCodeGenerator.Attributes;
 using Godot;
-using GodotOnReady.Attributes;
-using GodotOnReadyDev;
+using SomeNamespace;
 using System;
 
 public partial class MyGui : VBoxContainer
 {
-	// Example parent lookup with a property that doesn't share the name of the class in a script
-	// that doesn't share its name with the node it's attached to.
-	public NumberService Numbers { get; } = new NumberService();
-	
-	[OnReadyGet(nameof(OptionalButton), OrNull = true)] public Button OptionalButton { get; set; }
+    // Example parent lookup with a property that doesn't share the name of the class in a script
+    // that doesn't share its name with the node it's attached to.
+    public NumberService Numbers { get; } = new NumberService();
 
-	[OnReadyGet(OrNull = true)] public Button FullyOptionalButton { get; set; }
+    [OnReadyGet(nameof(OptionalButton), OrNull = true)] public Button OptionalButton { get; set; }
 
-	[OnReadyGet("LineEdit")] public LineEdit AddLineBox { get; set; }
+    [OnReadyGet(OrNull = true)] public Button FullyOptionalButton { get; set; }
 
-	[OnReadyFind] public Label LabelSomewhere;
-	[OnReadyFind(Property = "visible_characters")] public int LabelSomewhereVisible;
-	[OnReady] private void SetLabelSomewhere()
-	{
-		LabelSomewhere.Text = $"Found the label with value {LabelSomewhereVisible}.";
-		LabelSomewhere.VisibleCharacters = -1;
-	}
+    [OnReadyGet("LineEdit")] public LineEdit AddLineBox { get; set; }
 
-	// [OnReadyGet] private Button _nullNode;
-	// [OnReadyGet] private Texture _nullResource;
+    [OnReadyFind] public Label LabelSomewhere;
+    [OnReadyFind(Property = "visible_characters")] public int LabelSomewhereVisible;
+    [OnReady]
+    private void SetLabelSomewhere()
+    {
+        LabelSomewhere.Text = $"Found the label with value {LabelSomewhereVisible}.";
+        LabelSomewhere.VisibleCharacters = -1;
+    }
 
-	// [OnReadyGet("a/b/c")] private Button _notFoundNode;
-	// [OnReadyGet("a/b/d")] private Texture _notFoundResource;
-	
-	[OnReadyGet("GradientSprite", Property = "texture")] private GradientTexture _gt;
-	[OnReady] private void InitGradientEnd() => _gt.Gradient.SetColor(1, Colors.Blue);
+    // [OnReadyGet] private Button _nullNode;
+    // [OnReadyGet] private Texture _nullResource;
 
-	[OnReady]
-	public void InitializeInput()
-	{
-		AddLineBox.Text = $"Started up at {DateTime.UtcNow.ToLongDateString()}";
-		AddLineBox.Connect("text_entered", this, nameof(LineEdit_text_entered));
-		AddLineBox.GrabFocus();
-	}
+    // [OnReadyGet("a/b/c")] private Button _notFoundNode;
+    // [OnReadyGet("a/b/d")] private Texture _notFoundResource;
 
-	[OnReadyGet] private Tree _myTree;
-	private TreeItem _root;
+    [OnReadyGet("GradientSprite", Property = "texture")] private GradientTexture _gt;
+    [OnReady] private void InitGradientEnd() => _gt.Gradient.SetColor(1, Colors.Blue);
 
-	[OnReady]
-	public void InitializeTreeRoot()
-	{
-		_root = _myTree.CreateItem();
-		_myTree.HideRoot = true;
-	}
+    [OnReady]
+    public void InitializeInput()
+    {
+        AddLineBox.Text = $"Started up at {DateTime.UtcNow.ToLongDateString()}";
+        AddLineBox.Connect("text_entered", this, nameof(LineEdit_text_entered));
+        AddLineBox.GrabFocus();
+    }
 
-	[OnReadyGet("ExampleShoutImplementer")] public IShout _exampleGetShoutInterface;
-	[OnReady] private void Shout() => _exampleGetShoutInterface.Shout();
+    [OnReadyGet] private Tree _myTree;
+    private TreeItem _root;
 
-	public void LineEdit_text_entered(string text)
-	{
-		AddLineBox.Text = string.Empty;
+    [OnReady]
+    public void InitializeTreeRoot()
+    {
+        _root = _myTree.CreateItem();
+        _myTree.HideRoot = true;
+    }
 
-		TreeItem checkRoot = _root;
+    [OnReadyGet("ExampleShoutImplementer")] public IShout _exampleGetShoutInterface;
+    [OnReady] private void Shout() => _exampleGetShoutInterface.Shout();
 
-		var dirParts = text.Split("/");
+    public void LineEdit_text_entered(string text)
+    {
+        AddLineBox.Text = string.Empty;
 
-		foreach (var dirPart in dirParts)
-		{
-			TreeItem nest = null;
+        TreeItem checkRoot = _root;
 
-			TreeItem check = checkRoot.GetChildren();
-			while (check != null)
-			{
-				if (check.GetText(0) == dirPart)
-				{
-					nest = check;
-				}
+        var dirParts = text.Split("/");
 
-				check = check.GetNext();
-			}
+        foreach (var dirPart in dirParts)
+        {
+            TreeItem nest = null;
 
-			if (nest is null)
-			{
-				nest = _myTree.CreateItem(checkRoot);
-				nest.SetText(0, dirPart);
-			}
+            TreeItem check = checkRoot.GetChildren();
+            while (check != null)
+            {
+                if (check.GetText(0) == dirPart)
+                {
+                    nest = check;
+                }
 
-			checkRoot = nest;
-		}
-	}
+                check = check.GetNext();
+            }
 
-	[OnReady] public void TryEnum()
-	{
-		GD.Print(DemoEnum.A, ": ", DemoEnum.A.GetData().Extended);
-		GD.Print(DemoEnum.B, ": ", DemoEnum.B.GetData().Extended);
-	}
+            if (nest is null)
+            {
+                nest = _myTree.CreateItem(checkRoot);
+                nest.SetText(0, dirPart);
+            }
+
+            checkRoot = nest;
+        }
+    }
+
+    [OnReady]
+    public void TryEnum()
+    {
+        //GD.Print(DemoEnum.A, ": ", DemoEnum.A.GetData().Extended);
+        //GD.Print(DemoEnum.B, ": ", DemoEnum.B.GetData().Extended);
+    }
 }

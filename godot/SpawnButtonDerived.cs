@@ -1,18 +1,19 @@
-﻿using Godot;
-using GodotOnReady.Attributes;
+﻿using Fractural.GodotCodeGenerator.Attributes;
+using Godot;
 
 public partial class SpawnButtonDerived : SpawnButton
 {
-	[OnReadyGet] public HBoxContainer _other { get; set; }
+    [OnReadyGet] public HBoxContainer _other { get; set; }
 
-	[OnReady] public void R()
-	{
-		GD.Print($"{nameof(SpawnButtonDerived)} {this} is ready!");
-	}
+    [OnReady]
+    public void R()
+    {
+        GD.Print($"{nameof(SpawnButtonDerived)} {this} is ready!");
+    }
 
-	public override void OnPress()
-	{
-		base.OnPress();
-		_other.AddChild(_scene.Instance());
-	}
+    public override void OnPress()
+    {
+        base.OnPress();
+        _other.AddChild(_scene.Instance());
+    }
 }

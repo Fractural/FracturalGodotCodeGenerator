@@ -1,9 +1,10 @@
-﻿using GodotOnReady.Attributes;
+﻿using Fractural.GodotCodeGenerator.Attributes;
 
 public partial class SpawnButtonGeneric<T> : SpawnButton
 {
-	[OnReady] private void SetupText()
-	{
-		Text = $"My type is {typeof(T)}!";
-	}
+    [OnReady]
+    private void SetupText()
+    {
+        Text = $"My type is {typeof(T)}!";
+    }
 }

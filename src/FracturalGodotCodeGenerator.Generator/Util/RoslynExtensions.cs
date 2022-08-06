@@ -1,60 +1,60 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Linq;
 
-namespace GodotOnReady.Generator.Util
+namespace Fractural.GodotCodeGenerator.Generator.Util
 {
-	internal static class RoslynExtensions
-	{
-		public static string ToFullDisplayString(this ISymbol s)
-		{
-			return s.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-		}
+    internal static class RoslynExtensions
+    {
+        public static string ToFullDisplayString(this ISymbol s)
+        {
+            return s.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        }
 
-		public static string? GetSymbolNamespaceName(this INamedTypeSymbol iTypeNode)
-		{
-			string? namespaceName = null;
-			INamespaceSymbol? ns = iTypeNode.ContainingNamespace;
+        public static string? GetSymbolNamespaceName(this INamedTypeSymbol iTypeNode)
+        {
+            string? namespaceName = null;
+            INamespaceSymbol? ns = iTypeNode.ContainingNamespace;
 
-			while (ns?.ContainingNamespace is { } containing)
-			{
-				if (namespaceName == null)
-				{
-					namespaceName = ns.Name;
-				}
-				else
-				{
-					namespaceName = ns.Name + "." + namespaceName;
-				}
+            while (ns?.ContainingNamespace is { } containing)
+            {
+                if (namespaceName == null)
+                {
+                    namespaceName = ns.Name;
+                }
+                else
+                {
+                    namespaceName = ns.Name + "." + namespaceName;
+                }
 
-				ns = containing;
-			}
+                ns = containing;
+            }
 
-			return namespaceName;
-		}
+            return namespaceName;
+        }
 
-		public static bool IsOfBaseType(this ITypeSymbol? type, ITypeSymbol baseType)
-		{
-			if (type is ITypeParameterSymbol p)
-			{
-				return p.ConstraintTypes.Any(ct => ct.IsOfBaseType(baseType));
-			}
+        public static bool IsOfBaseType(this ITypeSymbol? type, ITypeSymbol baseType)
+        {
+            if (type is ITypeParameterSymbol p)
+            {
+                return p.ConstraintTypes.Any(ct => ct.IsOfBaseType(baseType));
+            }
 
-			while (type != null)
-			{
-				if (SymbolEqualityComparer.Default.Equals(type, baseType))
-				{
-					return true;
-				}
+            while (type != null)
+            {
+                if (SymbolEqualityComparer.Default.Equals(type, baseType))
+                {
+                    return true;
+                }
 
-				type = type.BaseType;
-			}
+                type = type.BaseType;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public static bool IsInterface(this ITypeSymbol? type)
-		{
-			return type?.TypeKind == TypeKind.Interface;
-		}
-	}
+        public static bool IsInterface(this ITypeSymbol? type)
+        {
+            return type?.TypeKind == TypeKind.Interface;
+        }
+    }
 }
