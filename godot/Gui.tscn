@@ -1,0 +1,127 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://MyGui.cs" type="Script" id=1]
+[ext_resource path="res://SpawnButton.cs" type="Script" id=2]
+[ext_resource path="res://SpawnButtonDerived.cs" type="Script" id=3]
+[ext_resource path="res://SpawnButtonConcrete.cs" type="Script" id=4]
+[ext_resource path="res://NodeImplementingIShout.cs" type="Script" id=5]
+[ext_resource path="res://FetchByGenericButton.cs" type="Script" id=6]
+[ext_resource path="res://FetchByGenericInterfaceConcrete.cs" type="Script" id=7]
+[ext_resource path="res://RandomNumberLabel.cs" type="Script" id=8]
+[ext_resource path="res://Provider.cs" type="Script" id=9]
+[ext_resource path="res://Consumer.cs" type="Script" id=10]
+
+[sub_resource type="Gradient" id=1]
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 96
+
+[node name="Gui" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+LabelSomewhereMask = "Somewhere"
+LabelSomewhereVisibleMask = "Somewhere"
+MyTreePath = NodePath("Tree")
+
+[node name="Tree" type="Tree" parent="."]
+margin_right = 1024.0
+margin_bottom = 496.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_top = 500.0
+margin_right = 1024.0
+margin_bottom = 524.0
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="Somewhere" type="Label" parent="LineEdit"]
+margin_left = 334.0
+margin_top = -63.0
+margin_right = 493.0
+margin_bottom = -49.0
+text = "This label is somewhere!
+And more!"
+percent_visible = 0.896552
+
+[node name="Label" type="Label" parent="LineEdit"]
+margin_left = 511.0
+margin_top = -146.0
+margin_right = 511.0
+margin_bottom = -132.0
+text = "Random number here"
+script = ExtResource( 8 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 528.0
+margin_right = 1024.0
+margin_bottom = 548.0
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+margin_right = 52.0
+margin_bottom = 20.0
+text = "Spawn"
+script = ExtResource( 2 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_top = 552.0
+margin_right = 1024.0
+margin_bottom = 572.0
+
+[node name="Button" type="Button" parent="HBoxContainer2"]
+margin_right = 52.0
+margin_bottom = 20.0
+text = "Spawn"
+script = ExtResource( 3 )
+OtherPath = NodePath("../../HBoxContainer")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+margin_top = 576.0
+margin_right = 1024.0
+margin_bottom = 596.0
+
+[node name="Button" type="Button" parent="HBoxContainer3"]
+margin_right = 52.0
+margin_bottom = 20.0
+text = "Spawn"
+script = ExtResource( 4 )
+
+[node name="ExampleShoutImplementer" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="FetchByGeneric" type="Node" parent="."]
+script = ExtResource( 6 )
+FPath = NodePath("../HBoxContainer/Button")
+
+[node name="FetchByGenericInterface" type="Node" parent="."]
+script = ExtResource( 7 )
+FPath = NodePath("../ExampleShoutImplementer")
+
+[node name="GradientSprite" type="Sprite" parent="."]
+position = Vector2( 589, 54 )
+scale = Vector2( 1, 32 )
+texture = SubResource( 2 )
+
+[node name="Provider" type="Control" parent="."]
+margin_top = 600.0
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 9 )
+
+[node name="Consumer" type="Control" parent="Provider"]
+margin_top = 4.0
+margin_right = 1024.0
+margin_bottom = 4.0
+script = ExtResource( 10 )
+
+[connection signal="pressed" from="HBoxContainer/Button" to="HBoxContainer/Button" method="OnPress"]
+[connection signal="pressed" from="HBoxContainer2/Button" to="HBoxContainer2/Button" method="OnPress"]
+[connection signal="pressed" from="HBoxContainer3/Button" to="HBoxContainer3/Button" method="OnPress"]

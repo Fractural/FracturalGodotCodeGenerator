@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <!-- Package intentionally includes no output for any target framework. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoWarn>NU5128</NoWarn>
+
+    <PackageDescription>GodotOnReady is a C# Source Generator that adds convenient onready-like features to your C# scripts in Godot Mono without any reflection.</PackageDescription>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GodotOnReady.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" />
+    <ProjectReference Include="..\GodotOnReady.Generator\FracturalGodotCodeGenerator.Generator.csproj" />
+  </ItemGroup>
+
+</Project>
