@@ -1,0 +1,4 @@
+[submodule "godot/addons/FracturalCSharpResourceRegistry"]
+	path = godot/addons/FracturalCSharpResourceRegistry
+	url = https://github.com/Fractural/FracturalCSharpResourceRegistry.git
+	branch = release
