@@ -33,7 +33,13 @@ namespace Tests.OnReadyOrderTests
         {
             expectedNewReadyOrder = new Queue<string>(new[] { nameof(controller.NewReadyN1), nameof(controller.NewReady0), nameof(controller.NewReady1), nameof(controller.NewReady2) });
             controller.Connect(nameof(OnReadyOrderTestsController.NewReadyFired), this, nameof(OnNewReadyFired));
-            AddChild(controller);
+
+            try
+            {
+                AddChild(controller);
+            }
+            catch { }
+
             Assert.IsEqual(expectedNewReadyOrder.Count, 0, "Expected ready queue count == 0");
         }
 

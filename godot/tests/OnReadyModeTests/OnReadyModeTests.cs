@@ -33,7 +33,11 @@ namespace Tests.OnReadyModeTests
             Assert.IsNull(controller.resourceGetPath);
             Assert.IsNull(controller.resourceManual);
 
-            AddChild(controller);
+            try
+            {
+                AddChild(controller);
+            }
+            catch { }
 
             Assert.IsNotNull(controller.nodeGetPath);
             Assert.IsNotNull(controller.nodeManual);

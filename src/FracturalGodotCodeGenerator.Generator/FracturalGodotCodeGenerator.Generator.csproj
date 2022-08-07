@@ -19,6 +19,10 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" />
+  </ItemGroup>
+
   <!--<ItemGroup>
     <ProjectReference Include="..\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" GeneratePathProperty="true" PrivateAssets="all"/>
   </ItemGroup>-->

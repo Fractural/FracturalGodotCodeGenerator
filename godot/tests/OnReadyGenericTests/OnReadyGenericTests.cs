@@ -28,13 +28,17 @@ namespace Tests.OnReadyGenericTests
         [Test]
         public void WhenReadied_ShouldCallNewOnReadyMethods()
         {
-            Assert.IsNotNull(controller.GenericType);
-            Assert.IsNotNull(controller.GenericTypeProperty);
-            Assert.IsNotNull(controller.buttonManual);
-            Assert.IsNotNull(controller.buttonGetPath);
-            Assert.IsNotNull(controller.buttonFind);
+            Assert.IsNull(controller.GenericType);
+            Assert.IsNull(controller.GenericTypeProperty);
+            Assert.IsNull(controller.buttonManual);
+            Assert.IsNull(controller.buttonGetPath);
+            Assert.IsNull(controller.buttonFind);
 
-            AddChild(controller);
+            try
+            {
+                AddChild(controller);
+            }
+            catch { }
 
             Assert.IsNotNull(controller.GenericType);
             Assert.IsNotNull(controller.GenericTypeProperty);

@@ -21,9 +21,8 @@ namespace Tests.OnReadyDerivedTests
             controller = scene.Instance<OnReadyDerivedTestsController>();
         }
 
-        public async Task Post()
+        public void Post()
         {
-            await UntilTimeout(1f);
             controller.QueueFree();
         }
 
@@ -31,7 +30,13 @@ namespace Tests.OnReadyDerivedTests
         public void WhenReadied_ButtonFindShouldBeSet()
         {
             Assert.IsNull(controller.button1Find);
-            AddChild(controller);
+
+            try
+            {
+                AddChild(controller);
+            }
+            catch { }
+
             Assert.IsNotNull(controller.button1Find, "Expected OnReadyFind to find button.");
             Assert.IsEqual(controller.button1Find.Name, "Button1");
         }
@@ -40,7 +45,13 @@ namespace Tests.OnReadyDerivedTests
         public void WhenReadied_ButtonGetShouldBeSet()
         {
             Assert.IsNull(controller.button2ManualGet);
-            AddChild(controller);
+
+            try
+            {
+                AddChild(controller);
+            }
+            catch { }
+
             Assert.IsNotNull(controller.button2ManualGet, "Expected OnReadyGet to use manually assigned button.");
             Assert.IsEqual(controller.button2ManualGet.Name, "Button2");
         }
@@ -49,7 +60,13 @@ namespace Tests.OnReadyDerivedTests
         public void WhenReadied_ButtonGetPathShouldBeSet()
         {
             Assert.IsNull(controller.button3GetPath);
-            AddChild(controller);
+
+            try
+            {
+                AddChild(controller);
+            }
+            catch { }
+
             Assert.IsNotNull(controller.button3GetPath, "Expected OnReadyGet to use manual path.");
             Assert.IsEqual(controller.button3GetPath.Name, "Button3");
         }
