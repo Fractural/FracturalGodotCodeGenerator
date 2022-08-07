@@ -11,7 +11,7 @@ namespace Tests.OnReadyTests
         public Button button1Find;
         [OnReadyGet]
         public Button button2ManualGet;
-        [OnReadyGet("HBoxContainer/VBoxContainer/Button3")]
+        [OnReadyGet("HBoxContainer/Button3")]
         public Button button3GetPath;
 
         [OnReadyFind("Button1", Export = true)]

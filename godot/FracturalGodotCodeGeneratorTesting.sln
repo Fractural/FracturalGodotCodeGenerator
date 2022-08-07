@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+# Visual Studio Version 19
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FracturalGodotCodeGeneratorTesting", "FracturalGodotCodeGeneratorTesting.csproj", "{8882BEE5-73EB-4D6F-B2CA-30A1DB663DF7}"
