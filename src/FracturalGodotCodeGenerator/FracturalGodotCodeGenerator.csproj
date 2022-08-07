@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GodotOnReady.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" />
-    <ProjectReference Include="..\GodotOnReady.Generator\FracturalGodotCodeGenerator.Generator.csproj" />
+    <ProjectReference Include="..\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" />
+    <ProjectReference Include="..\FracturalGodotCodeGenerator.Generator\FracturalGodotCodeGenerator.Generator.csproj" />
   </ItemGroup>
 
 </Project>

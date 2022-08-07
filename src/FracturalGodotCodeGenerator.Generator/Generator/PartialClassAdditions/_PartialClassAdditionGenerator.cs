@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace FracturalGodotCodeGenerator.Generator
@@ -27,23 +26,13 @@ namespace FracturalGodotCodeGenerator.Generator
         public void Execute(GeneratorExecutionContext context)
         {
             executionContext = context;
-            // If this isn't working, run 'dotnet build-server shutdown' first.
-            if (Environment
-                .GetEnvironmentVariable($"Debug{nameof(PartialClassAdditionGenerator)}") == "true")
-            {
-                Debugger.Launch();
-            }
 
             var receiver = context.SyntaxReceiver as SyntaxReceiver ?? throw new Exception();
-
-            INamedTypeSymbol GetSymbolByName(string fullName) =>
-                context.Compilation.GetTypeByMetadataName(fullName)
-                ?? throw new Exception($"Can't find {fullName}");
+            var processedSyntaxData = receiver.GenerateProcessedSyntaxData(context);
 
             List<PartialClassAdditionStrategy> strategies = ReflectionUtils.GetInstances<PartialClassAdditionStrategy>().ToList();
+            strategies.ForEach(x => x.Init(context));
             List<PartialClassAddition> additions = new();
-
-            var processedSyntaxData = receiver.GenerateProcessedSyntaxData(context);
 
             foreach (var classData in processedSyntaxData.ClassData)
             {

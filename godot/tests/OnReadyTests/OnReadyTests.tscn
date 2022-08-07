@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tests/_Shared/OnReadyTestsBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/OnReadyTests/OnReadyTestsController.cs" type="Script" id=2]
+
+[node name="OnReadyTests" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+Button2ManualGetPath = NodePath("HBoxContainer/VBoxContainer/Button2")

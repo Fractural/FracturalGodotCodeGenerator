@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<testsuites failures="5" name="TestXML" tests="5" time="1.351">
+	<testsuite name="OnReadyDerivedTests" failures="3"  tests="3" time="0">
+		<testcase name="WhenReadied ButtonFindShouldBeSet" time="0"></testcase>
+		<testcase name="WhenReadied ButtonGetShouldBeSet" time="0"></testcase>
+		<testcase name="WhenReadied ButtonGetPathShouldBeSet" time="0"></testcase>
+	</testsuite>
+
+	<testsuite name="OnReadyGenericTests" failures="1"  tests="1" time="0">
+		<testcase name="WhenReadied ShouldCallNewOnReadyMethods" time="0"></testcase>
+	</testsuite>
+
+	<testsuite name="OnReadyModeTests" failures="1"  tests="1" time="0">
+		<testcase name="WhenReadiedAndExportModeSet ShouldSetResourceAndNodesCorrectly" time="0"></testcase>
+	</testsuite>
+
+	<testsuite name="OnReadyOrderTests" failures="1"  tests="1" time="0">
+		<testcase name="WhenReadied ShouldCallNewOnReadyMethods" time="0"></testcase>
+	</testsuite>
+
+	<testsuite name="OnReadyTests" failures="3"  tests="3" time="0">
+		<testcase name="WhenReadied ButtonFindShouldBeSet" time="0"></testcase>
+		<testcase name="WhenReadied ButtonGetShouldBeSet" time="0"></testcase>
+		<testcase name="WhenReadied ButtonGetPathShouldBeSet" time="0"></testcase>
+	</testsuite>
+
+</testsuites>

@@ -6,6 +6,9 @@ using System;
 
 namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
 {
+    /// <remarks>
+    /// Strategy handled by <see cref="OnReadyGetAdditionStrategy"/>
+    /// </remarks>
     public class OnReadyGetNodeAddition : OnReadyGetAddition
     {
         public OnReadyGetNodeAddition(MemberAttributeSite site) : base(site) { }

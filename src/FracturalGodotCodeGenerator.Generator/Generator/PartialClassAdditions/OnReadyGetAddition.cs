@@ -11,14 +11,22 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
         private INamedTypeSymbol nodeSymbol;
         private INamedTypeSymbol resourceSymbol;
 
-        public OnReadyGetAdditionStrategy(GeneratorExecutionContext context) : base(context)
+        private INamedTypeSymbol onReadyGetAttributeSymbol;
+
+        public override void Init(GeneratorExecutionContext context)
         {
+            base.Init(context);
             nodeSymbol = GetSymbolByName($"{GodotNamespace}.Node");
             resourceSymbol = GetSymbolByName($"{GodotNamespace}.Resource");
+            onReadyGetAttributeSymbol = GetAttributeByName("OnReadyGet"); //GetSymbolByName(typeof(OnReadyGetAttribute).FullName);
         }
 
         public override PartialClassAddition? Use(MemberAttributeSite site)
         {
+            if (!SymbolEquals(site.Attribute.AttributeClass, onReadyGetAttributeSymbol))
+                return null;
+
+            //OnReadyGetAttribute castedAttr = site.Attribute.MapToType<OnReadyGetAttribute>();
             var member = site.Member;
             if (member.Type.IsOfBaseType(nodeSymbol))
             {

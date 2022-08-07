@@ -3,6 +3,25 @@
 namespace Fractural.GodotCodeGenerator.Attributes
 {
     /// <summary>
+    /// Controls what parent type the exported property will accept.
+    /// </summary>
+    public enum ExportMode
+    {
+        /// <summary>
+        /// Exported property will accept Nodes or Resources, with a preference for Nodes when given an interface.
+        /// </summary>
+        Auto,
+        /// <summary>
+        /// Exported property will only accept Nodes.
+        /// </summary>
+        Node,
+        /// <summary>
+        /// Exported property will only accept Resources.
+        /// </summary>
+        Resource,
+    }
+
+    /// <summary>
     /// Generates code to initialize this property or field when the node is ready, and make the
     /// initialization path configurable in the Godot editor. This attribute works on properties and
     /// fields of types that subclass either Node or Resource.
@@ -10,25 +29,6 @@ namespace Fractural.GodotCodeGenerator.Attributes
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class OnReadyGetAttribute : Attribute
     {
-        /// <summary>
-        /// Controls what parent type the exported property will accept.
-        /// </summary>
-        public enum ExportMode
-        {
-            /// <summary>
-            /// Exported property will accept Nodes or Resources, with a preference for Nodes when given an interface.
-            /// </summary>
-            Auto,
-            /// <summary>
-            /// Exported property will only accept Nodes.
-            /// </summary>
-            Node,
-            /// <summary>
-            /// Exported property will only accept Resources.
-            /// </summary>
-            Resource,
-        }
-
         public string Path { get; }
 
         /// <summary>
@@ -58,9 +58,10 @@ namespace Fractural.GodotCodeGenerator.Attributes
         /// The path that will be loaded when the node is ready. If not set, a property is generated
         /// with [Export], so the path can be set in the Godot editor.
         /// </param>
-        public OnReadyGetAttribute(string path = "")
+        public OnReadyGetAttribute(string path = "", ExportMode mode = ExportMode.Auto)
         {
             Path = path;
+            Mode = mode;
         }
     }
 

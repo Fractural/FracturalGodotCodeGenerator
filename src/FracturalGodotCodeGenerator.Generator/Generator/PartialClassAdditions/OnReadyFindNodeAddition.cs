@@ -1,11 +1,30 @@
 ﻿using Fractural.GodotCodeGenerator.Generator.Util;
 using FracturalGodotCodeGenerator.Generator.Data;
 using FracturalGodotCodeGenerator.Generator.Util;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 
 namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
 {
+    public class OnReadyFindAdditionStrategy : PartialClassAdditionStrategy
+    {
+        INamedTypeSymbol onReadyFindAttributeSymbol;
+
+        public override void Init(GeneratorExecutionContext context)
+        {
+            base.Init(context);
+            onReadyFindAttributeSymbol = GetAttributeByName("OnReadyFind"); //GetSymbolByName(typeof(OnReadyAttribute).FullName);
+        }
+
+        public override PartialClassAddition? Use(MemberAttributeSite site)
+        {
+            if (SymbolEquals(site.Attribute.AttributeClass, onReadyFindAttributeSymbol))
+                return new OnReadyFindNodeAddition(site);
+            return null;
+        }
+    }
+
     public class OnReadyFindNodeAddition : OnReadyGetAddition
     {
         public OnReadyFindNodeAddition(MemberAttributeSite site) : base(site) { }

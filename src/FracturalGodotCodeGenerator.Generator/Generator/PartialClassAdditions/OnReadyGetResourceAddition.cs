@@ -1,18 +1,14 @@
 ﻿using Fractural.GodotCodeGenerator.Generator.Util;
 using FracturalGodotCodeGenerator.Generator.Data;
 using FracturalGodotCodeGenerator.Generator.Util;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 
 namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
 {
-    public class OnReadyGetResourceAdditionStrategy : OnReadyAddition
-    {
-        public OnReadyGetResourceAdditionStrategy(IMethodSymbol method, AttributeData attribute, INamedTypeSymbol @class) : base(method, attribute, @class)
-        {
-        }
-    }
+    /// <remarks>
+    /// Strategy handled by <see cref="OnReadyGetAdditionStrategy"/>
+    /// </remarks>
     public class OnReadyGetResourceAddition : OnReadyGetAddition
     {
         public OnReadyGetResourceAddition(MemberAttributeSite memberSite) : base(memberSite)

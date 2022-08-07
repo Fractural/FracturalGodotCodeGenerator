@@ -15,7 +15,7 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
 
         protected GeneratorExecutionContext context;
 
-        protected PartialClassAdditionStrategy(GeneratorExecutionContext context)
+        public virtual void Init(GeneratorExecutionContext context)
         {
             this.context = context;
         }

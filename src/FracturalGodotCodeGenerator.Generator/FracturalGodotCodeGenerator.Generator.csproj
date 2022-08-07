@@ -18,10 +18,15 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
   </ItemGroup>
-	<PropertyGroup>
-		<AnalysisMode>All</AnalysisMode>
-		<NoWarn>CA1062</NoWarn>
-		<NoWarn>CA2201</NoWarn>
-	</PropertyGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" GeneratePathProperty="true" PrivateAssets="all"/>
+  </ItemGroup>-->
+  
+  <PropertyGroup>
+    <!--<AnalysisMode>All</AnalysisMode>-->
+    <NoWarn>CA1062</NoWarn>
+    <NoWarn>CA2201</NoWarn>
+  </PropertyGroup>
 
 </Project>

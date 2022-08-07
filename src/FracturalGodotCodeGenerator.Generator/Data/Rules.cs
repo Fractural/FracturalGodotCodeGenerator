@@ -52,7 +52,7 @@ namespace FracturalGodotCodeGenerator.Generator.Data
                     Enum.GetName(typeof(Code), id),
                     title,
                     messageFormat,
-                    category,
+                    Enum.GetName(typeof(Category), category),
                     defaultSeverity,
                     isEnabledByDefault
                 ),

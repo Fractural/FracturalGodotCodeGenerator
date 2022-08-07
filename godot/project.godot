@@ -8,11 +8,48 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "Node",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/test/test.gd"
+} ]
 _global_script_class_icons={
+"WAT": "",
+"WATTest": ""
 }
+
+[FracCSRG]
+
+ClassPrefix=""
+SearchType=0
+ResourceScriptDirectories=[ "res://" ]
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests"
+Test_Metadata_Directory="res://tests"
+Tags=PoolStringArray(  )
+Cache_Tests=false
+Window_Size=Vector2( 1280, 720 )
+Minimize_Window_When_Running_Tests=false
+Port=6008
+Display=8
 
 [application]
 
 config/name="FracturalGodotCodeGeneratorTesting"
-run/main_scene="res://Gui.tscn"
+run/main_scene="res://addons/WAT/gui.tscn"
+boot_splash/image="res://bootsplash.png"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/FracturalCSharpResourceRegistry/plugin.cfg", "res://addons/WAT/plugin.cfg" )

@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="OnReadyTests" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 510.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="Button1" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_right = 510.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "ButtonFind"
+
+[node name="Button2" type="ColorPickerButton" parent="HBoxContainer/VBoxContainer"]
+margin_top = 302.0
+margin_right = 510.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button3" type="Button" parent="HBoxContainer"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+text = "ButtonGetPath"

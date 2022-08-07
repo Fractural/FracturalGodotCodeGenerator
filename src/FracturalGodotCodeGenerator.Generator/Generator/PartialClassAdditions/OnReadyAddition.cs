@@ -7,16 +7,19 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
 {
     public class OnReadyAdditionStrategy : PartialClassAdditionStrategy
     {
-        INamedTypeSymbol onReadyAttribute;
+        INamedTypeSymbol onReadyAttributeSymbol;
 
-        public OnReadyAdditionStrategy(GeneratorExecutionContext context) : base(context)
+        public override void Init(GeneratorExecutionContext context)
         {
-            onReadyAttribute = GetAttributeByName("OnReadyAttribute");
+            base.Init(context);
+            onReadyAttributeSymbol = GetAttributeByName("OnReady"); //GetSymbolByName(typeof(OnReadyAttribute).FullName);
         }
 
         public override PartialClassAddition? Use(MethodAttributeSite site)
         {
-            if (SymbolEquals(site.Attribute.AttributeClass, )
+            if (SymbolEquals(site.Attribute.AttributeClass, onReadyAttributeSymbol))
+                return new OnReadyAddition(site);
+            return null;
         }
     }
 
@@ -24,15 +27,12 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
     {
         public IMethodSymbol Method { get; }
 
-        public OnReadyAddition(
-            IMethodSymbol method,
-            AttributeData attribute,
-            INamedTypeSymbol @class)
-            : base(@class)
+        public OnReadyAddition(MethodAttributeSite site)
+            : base(site.Class)
         {
-            Method = method;
+            Method = site.Method;
 
-            foreach (var namedArg in attribute.NamedArguments)
+            foreach (var namedArg in site.Attribute.NamedArguments)
             {
                 if (namedArg.Key == "Order" && namedArg.Value.Value is int i)
                 {
