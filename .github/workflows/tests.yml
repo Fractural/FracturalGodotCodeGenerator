@@ -15,6 +15,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          cd godot
           nuget restore
           mkdir -p .mono/assemblies/Debug
           cp /usr/local/bin/GodotSharp/Api/Release/* .mono/assemblies/Debug
@@ -23,7 +24,7 @@ jobs:
         run: msbuild
 
       - name: Run
-        run: godot godot/addons/WAT/cli.tscn run=all
+        run: godot addons/WAT/cli.tscn run=all
 
       - name: Upload Test Results
         if: always()
