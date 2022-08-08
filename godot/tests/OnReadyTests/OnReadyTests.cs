@@ -37,7 +37,7 @@ namespace Tests.OnReadyTests
             catch { }
 
             Assert.IsNotNull(controller.button1Find, "Expected OnReadyFind to find button.");
-            Assert.IsEqual(controller.button1Find.Name, "Button1");
+            Assert.IsEqual(controller.button1Find.Name, "Button1", $"Expected {nameof(controller.button1Find)} to be 'Button1'.");
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Tests.OnReadyTests
             catch { }
 
             Assert.IsNotNull(controller.button2ManualGet, "Expected OnReadyGet to use manually assigned button.");
-            Assert.IsEqual(controller.button2ManualGet.Name, "Button2");
+            Assert.IsEqual(controller.button2ManualGet.Name, "Button2", $"Expected {nameof(controller.button2ManualGet)} to be 'Button2'.");
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace Tests.OnReadyTests
             }
             catch { }
 
-            Assert.IsNotNull(controller.button3GetPath, "Expected OnReadyGet to use manual path.");
-            Assert.IsEqual(controller.button3GetPath.Name, "Button3");
+            Assert.IsNotNull(controller.button3GetPath, "Expected OnReadyGet with path to find button at path.");
+            Assert.IsEqual(controller.button3GetPath.Name, "Button3", $"Expected {nameof(controller.button3GetPath)} to have 'Button3'.");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Fractural.GodotCodeGenerator.Generator.Util;
+﻿using Fractural.GodotCodeGenerator.Attributes;
+using Fractural.GodotCodeGenerator.Generator.Util;
 using FracturalGodotCodeGenerator.Generator.Data;
 using FracturalGodotCodeGenerator.Generator.Util;
 using Microsoft.CodeAnalysis;
@@ -14,7 +15,7 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
         public override void Init(GeneratorExecutionContext context)
         {
             base.Init(context);
-            onReadyFindAttributeSymbol = GetAttributeByName("OnReadyFind"); //GetSymbolByName(typeof(OnReadyAttribute).FullName);
+            onReadyFindAttributeSymbol = GetSymbolByName<OnReadyFindAttribute>();
         }
 
         public override PartialClassAddition? Use(MemberAttributeSite site)

@@ -1,36 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
-    <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>9.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<IsRoslynComponent>true</IsRoslynComponent>
 
-    <!-- Don't include build output using normal config: use custom location. -->
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <NoWarn>NU5128</NoWarn>
-  </PropertyGroup>
+		<!-- Don't include build output using normal config: use custom location. -->
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<NoWarn>NU5128</NoWarn>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" />
-  </ItemGroup>
-
-  <!--<ItemGroup>
-    <ProjectReference Include="..\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" GeneratePathProperty="true" PrivateAssets="all"/>
-  </ItemGroup>-->
-  
-  <PropertyGroup>
-    <!--<AnalysisMode>All</AnalysisMode>-->
-    <NoWarn>CA1062</NoWarn>
-    <NoWarn>CA2201</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup>
+		<!--<AnalysisMode>All</AnalysisMode>-->
+		<NoWarn>CA1062</NoWarn>
+		<NoWarn>CA2201</NoWarn>
+	</PropertyGroup>
 
 </Project>

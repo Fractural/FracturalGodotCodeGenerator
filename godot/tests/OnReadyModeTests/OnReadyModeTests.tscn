@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tests/OnReadyModeTests/ConcreteCustomNode.cs" type="Script" id=1]
 [ext_resource path="res://tests/OnReadyModeTests/OnReadyModeTestsController.cs" type="Script" id=2]
+[ext_resource path="res://tests/OnReadyModeTests/ConcreteCustomResource.tres" type="Resource" id=3]
 
 [node name="OnReadyModeTests" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
+ResourceManualResource = ExtResource( 3 )
 NodeManualPath = NodePath("ConcreteCustomNode")
 
 [node name="ConcreteCustomNode" type="Control" parent="."]

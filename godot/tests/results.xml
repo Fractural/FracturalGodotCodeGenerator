@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<testsuites failures="1" name="TestXML" tests="5" time="5.554">
+<testsuites failures="0" name="TestXML" tests="5" time="6.674">
 	<testsuite name="OnReadyDerivedTests" failures="0"  tests="3" time="0">
 		<testcase name="WhenReadied ButtonFindShouldBeSet" time="0"></testcase>
 		<testcase name="WhenReadied ButtonGetShouldBeSet" time="0"></testcase>
@@ -10,12 +10,8 @@
 		<testcase name="WhenReadied ShouldCallNewOnReadyMethods" time="0"></testcase>
 	</testsuite>
 
-	<testsuite name="OnReadyModeTests" failures="1"  tests="1" time="0">
-		<testcase name="WhenReadiedAndExportModeSet ShouldSetResourceAndNodesCorrectly" time="0">
-			<failure message="EXPECTED: object is not null but GOT object is null"></failure>
-			<failure message="EXPECTED: object is not null but GOT object is null"></failure>
-			<failure message="EXPECTED: object is not null but GOT object is null"></failure>
-			<failure message="EXPECTED: object is not null but GOT object is null"></failure></testcase>
+	<testsuite name="OnReadyModeTests" failures="0"  tests="1" time="0">
+		<testcase name="WhenReadiedAndExportModeSet ShouldSetResourceAndNodesCorrectly" time="0"></testcase>
 	</testsuite>
 
 	<testsuite name="OnReadyOrderTests" failures="0"  tests="1" time="0">

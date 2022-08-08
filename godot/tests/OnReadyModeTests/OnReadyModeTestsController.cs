@@ -7,12 +7,14 @@ namespace Tests.OnReadyModeTests
     {
         [OnReadyGet(Mode = ExportMode.Resource)]
         public ICustomResourceOrNode resourceManual;
-        [OnReadyGet("res://tests/OnReadyModeTests/ConcreteCustomResource.tres", ExportMode.Resource)]
+        [OnReadyGet("res://tests/OnReadyModeTests/ConcreteCustomResource.tres", Mode = ExportMode.Resource)]
         public ICustomResourceOrNode resourceGetPath;
 
         [OnReadyGet(Mode = ExportMode.Node)]
         public ICustomResourceOrNode nodeManual;
-        [OnReadyGet("HBoxContainer/VBoxContainer/Button1", ExportMode.Node)]
+        [OnReadyGet("ConcreteCustomNode", Mode = ExportMode.Node)]
         public ICustomResourceOrNode nodeGetPath;
+        [OnReadyFind("ConcreteCustomNode", Mode = ExportMode.Node)]
+        public ICustomResourceOrNode nodeFind;
     }
 }

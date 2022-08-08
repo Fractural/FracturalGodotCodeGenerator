@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace FracturalGodotCodeGenerator.Generator
@@ -25,6 +26,12 @@ namespace FracturalGodotCodeGenerator.Generator
 
         public void Execute(GeneratorExecutionContext context)
         {
+            //#if DEBUG
+            //            if (!Debugger.IsAttached)
+            //            {
+            //                Debugger.Launch();
+            //            }
+            //#endif
             executionContext = context;
 
             var receiver = context.SyntaxReceiver as SyntaxReceiver ?? throw new Exception();

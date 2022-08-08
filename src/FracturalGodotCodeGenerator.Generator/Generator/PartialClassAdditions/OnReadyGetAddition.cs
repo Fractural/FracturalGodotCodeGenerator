@@ -1,4 +1,5 @@
-﻿using Fractural.GodotCodeGenerator.Generator.Util;
+﻿using Fractural.GodotCodeGenerator.Attributes;
+using Fractural.GodotCodeGenerator.Generator.Util;
 using FracturalGodotCodeGenerator.Generator.Data;
 using FracturalGodotCodeGenerator.Generator.Util;
 using Microsoft.CodeAnalysis;
@@ -18,7 +19,7 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
             base.Init(context);
             nodeSymbol = GetSymbolByName($"{GodotNamespace}.Node");
             resourceSymbol = GetSymbolByName($"{GodotNamespace}.Resource");
-            onReadyGetAttributeSymbol = GetAttributeByName("OnReadyGet"); //GetSymbolByName(typeof(OnReadyGetAttribute).FullName);
+            onReadyGetAttributeSymbol = GetSymbolByName<OnReadyGetAttribute>();
         }
 
         public override PartialClassAddition? Use(MemberAttributeSite site)
@@ -26,40 +27,63 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
             if (!SymbolEquals(site.Attribute.AttributeClass, onReadyGetAttributeSymbol))
                 return null;
 
-            //OnReadyGetAttribute castedAttr = site.Attribute.MapToType<OnReadyGetAttribute>();
+            OnReadyGetAttribute castedAttr = site.Attribute.MapToType<OnReadyGetAttribute>();
+            if (castedAttr.Property?.Length > 0)
+                castedAttr.Mode = ExportMode.Node;
+
+            /// <summary>
+            /// Fetches the correct OnReadyGet...Addition class based on the export mode of the attribute.
+            /// </summary>
+            PartialClassAddition GetCorrectOnReadyGetAddition()
+            {
+                switch (castedAttr.Mode)
+                {
+                    case ExportMode.Auto:
+                    case ExportMode.Node:
+                    default:
+                        return new OnReadyGetNodeAddition(site);
+                    case ExportMode.Resource:
+                        return new OnReadyGetResourceAddition(site);
+                }
+            }
+
+            bool modeAcceptsNode = castedAttr.Mode == ExportMode.Resource || castedAttr.Mode == ExportMode.Auto;
+            bool modeAcceptsResource = castedAttr.Mode == ExportMode.Node || castedAttr.Mode == ExportMode.Auto;
+
             var member = site.Member;
             if (member.Type.IsOfBaseType(nodeSymbol))
             {
-                return new OnReadyGetNodeAddition(site);
-            }
-            else if (site.Attribute.NamedArguments
-                .Any(a => a.Key == "Property" && a.Value.Value is string { Length: > 0 }))
-            {
-                // If a Property path is given, always treat it as a node. The
-                // primary use of Property is to get a Resource from a Node that
-                // doesn't have a statically-typed .NET API.
+                if (!modeAcceptsNode)
+                    context.ReportDiagnostic(
+                        Rules.FGCG0007(
+                            castedAttr.Mode,
+                            nameof(ExportMode.Node),
+                            site.Member.UnderlyingSymbol.Locations.FirstOrDefault()
+                        )
+                    );
                 return new OnReadyGetNodeAddition(site);
             }
             else if (member.Type.IsOfBaseType(resourceSymbol))
             {
+                if (!modeAcceptsResource)
+                    context.ReportDiagnostic(
+                        Rules.FGCG0007(
+                            castedAttr.Mode,
+                            nameof(ExportMode.Resource),
+                            site.Member.UnderlyingSymbol.Locations.FirstOrDefault()
+                        )
+                    );
                 return new OnReadyGetResourceAddition(site);
             }
             else if (member.Type.IsInterface())
             {
-                // Assume an interface means the intent is to get a node. This is
-                // ambiguous: it could be a resource! But this is unlikely.
-                // See https://github.com/31/GodotOnReady/issues/30
-                return new OnReadyGetNodeAddition(site);
+                return GetCorrectOnReadyGetAddition();
             }
             else if (member.Type.TypeKind == TypeKind.TypeParameter)
             {
                 if (member.Type.IsReferenceType)
                 {
-                    // Assume any T is a node. This works with GetNode because it's
-                    // only constrained to "class", not "Node". This assumption means
-                    // that a "Fetcher<T> where ... { [OnReadyGet] T Foo; }" can be used
-                    // for both interface and node values of T.
-                    return new OnReadyGetNodeAddition(site);
+                    return GetCorrectOnReadyGetAddition();
                 }
                 else
                 {
@@ -90,6 +114,7 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
         public string? Property { get; }
         public bool NonRecursive { get; }
         public bool Unowned { get; }
+        public ExportMode Mode { get; }
 
         public OnReadyGetAddition(MemberAttributeSite memberSite)
             : base(memberSite.Class)
@@ -133,6 +158,9 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
                         break;
                     case "Unowned" when namedArg.Value.Value is bool b:
                         Unowned = b;
+                        break;
+                    case "Mode" when namedArg.Value.Value is int i:
+                        Mode = (ExportMode)i;
                         break;
                 }
             }

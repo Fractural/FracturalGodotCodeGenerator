@@ -28,11 +28,11 @@ namespace Tests.OnReadyGenericTests
         [Test]
         public void WhenReadied_ShouldCallNewOnReadyMethods()
         {
-            Assert.IsNull(controller.GenericType);
-            Assert.IsNull(controller.GenericTypeProperty);
-            Assert.IsNull(controller.buttonManual);
-            Assert.IsNull(controller.buttonGetPath);
-            Assert.IsNull(controller.buttonFind);
+            Assert.IsNull(controller.GenericType, $"Expected {nameof(controller.GenericType)} to be null.");
+            Assert.IsNull(controller.GenericTypeProperty, $"Expected {nameof(controller.GenericTypeProperty)} to be null.");
+            Assert.IsNull(controller.buttonManual, $"Expected {nameof(controller.buttonManual)} to be null.");
+            Assert.IsNull(controller.buttonGetPath, $"Expected {nameof(controller.buttonGetPath)} to be null.");
+            Assert.IsNull(controller.buttonFind, $"Expected {nameof(controller.buttonFind)} to be null.");
 
             try
             {
@@ -40,11 +40,11 @@ namespace Tests.OnReadyGenericTests
             }
             catch { }
 
-            Assert.IsNotNull(controller.GenericType);
-            Assert.IsNotNull(controller.GenericTypeProperty);
-            Assert.IsNotNull(controller.buttonManual);
-            Assert.IsNotNull(controller.buttonGetPath);
-            Assert.IsNotNull(controller.buttonFind);
+            Assert.IsNotNull(controller.GenericType, $"Expected {nameof(controller.GenericType)} to be set.");
+            Assert.IsNotNull(controller.GenericTypeProperty, $"Expected {nameof(controller.GenericTypeProperty)} to be set.");
+            Assert.IsNotNull(controller.buttonManual, $"Expected {nameof(controller.buttonManual)} to be set.");
+            Assert.IsNotNull(controller.buttonGetPath, $"Expected {nameof(controller.buttonGetPath)} to be set.");
+            Assert.IsNotNull(controller.buttonFind, $"Expected {nameof(controller.buttonFind)} to be set.");
         }
     }
 }

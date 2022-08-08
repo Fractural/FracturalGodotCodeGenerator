@@ -1,4 +1,5 @@
-﻿using Fractural.GodotCodeGenerator.Generator.Util;
+﻿using Fractural.GodotCodeGenerator.Attributes;
+using Fractural.GodotCodeGenerator.Generator.Util;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
@@ -28,9 +29,6 @@ namespace FracturalGodotCodeGenerator.Generator.Data
             FGCG0005,
             FGCG0006,
             FGCG0007,
-            FGCG0008,
-            FGCG0009,
-            FGCG0010,
         }
 
         private static string CategoryString(Category category)
@@ -104,29 +102,6 @@ namespace FracturalGodotCodeGenerator.Generator.Data
         }
 
         /// <summary>
-        /// The type member is not supported. Expected a class extending one of the following.
-        /// </summary>
-        /// <param name="member"></param>
-        /// <param name="acceptedClasses"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static Diagnostic FGCG0006(IMemberSymbol member, params string[] acceptedClasses)
-        {
-            if (member == null) throw new ArgumentNullException(nameof(member));
-            string issue =
-                    $"The type '{member.Type}' of '{member.UnderlyingSymbol}' is not supported." +
-                    $" Expected a class extending one of the following: {String.Join(", ", acceptedClasses)}";
-            return CreateDiagnostic(
-                Code.FGCG0006,
-                Title.Inspection,
-                issue,
-                Category.Parsing,
-                DiagnosticSeverity.Error,
-                member.UnderlyingSymbol.Locations.FirstOrDefault()
-            );
-        }
-
-        /// <summary>
         /// The type is a not constrained to reference types
         /// </summary>
         /// <param name="member"></param>
@@ -192,6 +167,50 @@ namespace FracturalGodotCodeGenerator.Generator.Data
                 Category.Parsing,
                 DiagnosticSeverity.Error,
                 member.UnderlyingSymbol.Locations.FirstOrDefault()
+            );
+        }
+
+        /// <summary>
+        /// The type member is not supported. Expected a class extending one of the following.
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="acceptedClasses"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static Diagnostic FGCG0006(IMemberSymbol member, params string[] acceptedClasses)
+        {
+            if (member == null) throw new ArgumentNullException(nameof(member));
+            string issue =
+                    $"The type '{member.Type}' of '{member.UnderlyingSymbol}' is not supported." +
+                    $" Expected a class extending one of the following: {String.Join(", ", acceptedClasses)}";
+            return CreateDiagnostic(
+                Code.FGCG0006,
+                Title.Inspection,
+                issue,
+                Category.Parsing,
+                DiagnosticSeverity.Error,
+                member.UnderlyingSymbol.Locations.FirstOrDefault()
+            );
+        }
+
+        /// <summary>
+        /// OnReadyGet.Mode does not accept the expected class
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="expectedClassName"></param>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public static Diagnostic FGCG0007(ExportMode mode, string expectedClassName, Location location)
+        {
+            string issue =
+                $"OnReadyGet.Mode '{Enum.GetName(typeof(ExportMode), mode)}' does not accept the expected class '{expectedClassName}'.";
+            return CreateDiagnostic(
+                Code.FGCG0007,
+                Title.Usage,
+                issue,
+                Category.Parsing,
+                DiagnosticSeverity.Error,
+                location
             );
         }
     }

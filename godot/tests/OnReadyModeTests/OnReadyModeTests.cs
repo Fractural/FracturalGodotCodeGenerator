@@ -28,10 +28,10 @@ namespace Tests.OnReadyModeTests
         [Test]
         public void WhenReadiedAndExportModeSet_ShouldSetResourceAndNodesCorrectly()
         {
-            Assert.IsNull(controller.nodeGetPath);
-            Assert.IsNull(controller.nodeManual);
-            Assert.IsNull(controller.resourceGetPath);
-            Assert.IsNull(controller.resourceManual);
+            Assert.IsNull(controller.nodeGetPath, $"Expected {nameof(controller.nodeGetPath)} to be null.");
+            Assert.IsNull(controller.nodeManual, $"Expected {nameof(controller.nodeManual)} to be null.");
+            Assert.IsNull(controller.resourceGetPath, $"Expected {nameof(controller.resourceGetPath)} to be null.");
+            Assert.IsNull(controller.nodeFind, $"Expected {nameof(controller.nodeFind)} to be null.");
 
             try
             {
@@ -39,10 +39,12 @@ namespace Tests.OnReadyModeTests
             }
             catch { }
 
-            Assert.IsNotNull(controller.nodeGetPath);
-            Assert.IsNotNull(controller.nodeManual);
-            Assert.IsNotNull(controller.resourceGetPath);
-            Assert.IsNotNull(controller.resourceManual);
+            Assert.IsNotNull(controller.nodeGetPath, $"Expected {nameof(controller.nodeGetPath)} to be set.");
+            Assert.IsNotNull(controller.nodeManual, $"Expected {nameof(controller.nodeManual)} to be set.");
+            Assert.IsNotNull(controller.resourceGetPath, $"Expected {nameof(controller.resourceGetPath)} to be set.");
+            Assert.IsNotNull(controller.nodeFind, $"Expected {nameof(controller.nodeFind)} to be set.");
+
+            Assert.IsNotNull(controller.resourceManual, $"Expected {nameof(controller.resourceManual)} to be set.");
         }
     }
 }

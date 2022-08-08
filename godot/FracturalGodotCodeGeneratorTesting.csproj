@@ -1,9 +1,9 @@
-<Project Sdk="Godot.NET.Sdk/3.3.0">
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\src\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj" />
-    <ProjectReference Include="..\src\FracturalGodotCodeGenerator.Generator\FracturalGodotCodeGenerator.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
-  </ItemGroup>
+﻿<Project Sdk="Godot.NET.Sdk/3.3.0">
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\src\FracturalGodotCodeGenerator.Attributes\FracturalGodotCodeGenerator.Attributes.csproj"/>
+		<ProjectReference Include="..\src\FracturalGodotCodeGenerator.Generator\FracturalGodotCodeGenerator.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+	</ItemGroup>
 </Project>

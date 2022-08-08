@@ -17,6 +17,12 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
 
         private bool IsGeneratingAssignment => Path is { Length: > 0 };
 
+        private string GetExportTypeString()
+        {
+            if (Member.Type.IsInterface()) return "Resource";
+            return Member.Type.ToFullDisplayString();
+        }
+
         public override Action<SourceStringBuilder>? DeclarationWriter => g =>
         {
             string export = Path is not { Length: > 0 } || Export
@@ -24,27 +30,27 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
                 : "";
 
             g.Line();
-            g.Line(export, "public ", Member.Type.ToFullDisplayString(), " ", ExportPropertyName);
+            g.Line(export, "public ", GetExportTypeString(), " ", ExportPropertyName);
             g.BlockBrace(() =>
             {
-                g.Line("get => ", Member.Name, ";");
-                g.Line("set { _hasBeenSet", Member.Name, " = true; ", Member.Name, " = value; }");
+                g.Line("get => ", "(", GetExportTypeString(), ")", Member.Name, ";");
+                g.Line("set { _hasBeenSet", Member.Name, " = true; ", Member.Name, " = ", "(", Member.Type.ToFullDisplayString(), ")", "value; }");
             });
 
             g.Line("private bool _hasBeenSet", Member.Name, ";");
         };
 
-        public override Action<SourceStringBuilder>? ConstructorStatementWriter =>
-            IsGeneratingAssignment
-                ? g =>
-                {
-                    g.Line("if (Engine.EditorHint)");
-                    g.BlockBrace(() =>
-                    {
-                        WriteAssignment(g);
-                    });
-                }
-        : null;
+        //public override Action<SourceStringBuilder>? ConstructorStatementWriter =>
+        //    IsGeneratingAssignment
+        //        ? g =>
+        //        {
+        //            g.Line("if (Engine.EditorHint)");
+        //            g.BlockBrace(() =>
+        //            {
+        //                WriteAssignment(g);
+        //            });
+        //        }
+        //: null;
 
         public override Action<SourceStringBuilder>? OnReadyStatementWriter =>
             IsGeneratingAssignment || !OrNull

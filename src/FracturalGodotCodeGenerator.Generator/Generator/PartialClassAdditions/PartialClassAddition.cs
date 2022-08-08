@@ -31,9 +31,9 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
                 ?? throw new Exception($"Can't find {fullName}");
         }
 
-        protected INamedTypeSymbol GetAttributeByName(string attributeName)
+        protected INamedTypeSymbol GetSymbolByName<T>()
         {
-            return GetSymbolByName($"{AttributesNamespace}.{attributeName}Attribute");
+            return GetSymbolByName(typeof(T).FullName);
         }
 
         public bool TryUse(MemberAttributeSite site, out PartialClassAddition addition)
