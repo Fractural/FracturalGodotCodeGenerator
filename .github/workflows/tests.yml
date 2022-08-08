@@ -21,10 +21,14 @@ jobs:
           cp /usr/local/bin/GodotSharp/Api/Release/* .mono/assemblies/Debug
 
       - name: Compile
-        run: msbuild
+        run: |
+          cd godot
+          msbuild
 
       - name: Run
-        run: godot addons/WAT/cli.tscn run=all
+        run: |
+          cd godot
+          godot addons/WAT/cli.tscn run=all
 
       - name: Upload Test Results
         if: always()

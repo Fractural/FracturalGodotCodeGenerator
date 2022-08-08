@@ -148,3 +148,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+**/tests/metadata.json
+**/tests/results.xml

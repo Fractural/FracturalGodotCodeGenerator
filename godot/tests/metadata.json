@@ -1,9 +1,0 @@
-{
-	"failed": [
-		"res://tests/OnReadyDerivedTests/OnReadyDerivedTests.cs",
-		"res://tests/OnReadyGenericTests/OnReadyGenericTests.cs",
-		"res://tests/OnReadyModeTests/OnReadyModeTests.cs",
-		"res://tests/OnReadyOrderTests/OnReadyOrderTests.cs",
-		"res://tests/OnReadyTests/OnReadyTests.cs"
-	]
-}
