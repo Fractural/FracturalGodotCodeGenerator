@@ -1,4 +1,4 @@
-# FracturalGodotCodeGenerator
+# Fractural Godot Code Generator 🧯
 
 ![Unit Tests](https://github.com/Fractural/FracturalGodotCodeGenerator/actions/workflows/tests.yml/badge.svg)
 
