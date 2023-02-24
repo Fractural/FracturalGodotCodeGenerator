@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <PackageOutputPath>$(ArtifactsDir)</PackageOutputPath>
-    <Version>0.0.1-dev</Version>
+    <Version>0.0.0-dev</Version>
   </PropertyGroup>
 
   <!-- Default library packaging properties. -->

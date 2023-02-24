@@ -9,13 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+    
     - name: Checkout
       uses: actions/checkout@v2
+
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3.0.3
+    
+    - name: Set version
+      uses: jacobtomlinson/gha-find-replace@v3
+      with:
+        find: "<Version>(.*?)</Version>"
+        replace: "<Version>${{github.ref_name}}</Version>"
+        regex: false
+
     - name: Build
       run: dotnet build -c Release
+    
     - name: Pack nugets
       run: dotnet pack -c Release --no-build --output .
+    
     - name: Push to NuGet
       run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET}} --source https://api.nuget.org/v3/index.json
