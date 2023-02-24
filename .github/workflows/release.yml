@@ -21,7 +21,7 @@ jobs:
       with:
         find: "<Version>(.*?)</Version>"
         replace: "<Version>${{github.ref_name}}</Version>"
-        regex: false
+        regex: true
 
     - name: Build
       run: dotnet build -c Release
