@@ -102,4 +102,12 @@ namespace Fractural.GodotCodeGenerator.Attributes
         /// </summary>
         public int Order { get; set; }
     }
+
+    /// <summary>
+    /// Generates code to make an event awaitable by calling a method.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Event)]
+    public class AwaitableAttribute : Attribute
+    {
+    }
 }

@@ -26,12 +26,12 @@ namespace FracturalGodotCodeGenerator.Generator
 
         public void Execute(GeneratorExecutionContext context)
         {
-            //#if DEBUG
-            //            if (!Debugger.IsAttached)
-            //            {
-            //                Debugger.Launch();
-            //            }
-            //#endif
+//#if DEBUG
+//            if (!Debugger.IsAttached)
+//            {
+//                Debugger.Launch();
+//            }
+//#endif
             executionContext = context;
 
             var receiver = context.SyntaxReceiver as SyntaxReceiver ?? throw new Exception();
@@ -68,6 +68,16 @@ namespace FracturalGodotCodeGenerator.Generator
                     foreach (var attribute in methodSymbol.GetAttributes())
                     {
                         var site = new MethodAttributeSite(classSymbol, methodSymbol, attribute);
+                        foreach (var strategy in strategies)
+                            if (strategy.TryUse(site, out PartialClassAddition addition)) { additions.Add(addition); usesPartialClassAddition = true; }
+                    }
+                }
+
+                foreach (var eventSymbol in classSymbol.GetMembers().OfType<IEventSymbol>())
+                {
+                    foreach (var attribute in eventSymbol.GetAttributes())
+                    {
+                        var site = new EventAttributeSite(classSymbol, eventSymbol, attribute);
                         foreach (var strategy in strategies)
                             if (strategy.TryUse(site, out PartialClassAddition addition)) { additions.Add(addition); usesPartialClassAddition = true; }
                     }
@@ -183,6 +193,7 @@ namespace FracturalGodotCodeGenerator.Generator
             var builder = new SourceStringBuilder();
             builder.Line("using Godot;");
             builder.Line("using System;");
+            builder.Line("using System.Threading.Tasks;");
             builder.Line();
             return builder;
         }

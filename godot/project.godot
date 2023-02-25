@@ -53,3 +53,7 @@ config/icon="res://icon.png"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/FracturalCSharpResourceRegistry/plugin.cfg", "res://addons/WAT/plugin.cfg" )
+
+[mono]
+
+project/assembly_name="FracturalGodotCodeGeneratorTesting"

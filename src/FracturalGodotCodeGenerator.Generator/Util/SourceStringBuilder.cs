@@ -8,18 +8,32 @@ namespace FracturalGodotCodeGenerator.Generator.Util
         private readonly StringBuilder sourceBuilder = new();
         private readonly StringBuilder indentPrefix = new();
 
-        public void Line(params string[] parts)
+        public void Text(params string[] parts)
         {
             if (parts.Length != 0)
             {
-                sourceBuilder.Append(indentPrefix);
-
                 foreach (var s in parts)
                 {
                     sourceBuilder.Append(s);
                 }
             }
+        }
 
+        public void IndentText(params string[] parts)
+        {
+            sourceBuilder.Append(indentPrefix);
+            Text(parts);
+        }
+
+        public void NewLine()
+        {
+            sourceBuilder.AppendLine();
+        }
+
+        public void Line(params string[] parts)
+        {
+            sourceBuilder.Append(indentPrefix);
+            Text(parts);
             sourceBuilder.AppendLine();
         }
 
@@ -33,6 +47,18 @@ namespace FracturalGodotCodeGenerator.Generator.Util
             indentPrefix.Append(delimiter);
             writeInner();
             indentPrefix.Remove(indentPrefix.Length - delimiter.Length, delimiter.Length);
+        }
+
+        public void InlineBlockBrace(Action writeInner, string suffix = "", bool newLine = false)
+        {
+            Text("{");
+            sourceBuilder.AppendLine();
+            BlockTab(writeInner);
+            IndentText("}");
+            if (suffix != "")
+                Text(suffix);
+            if (newLine)
+                NewLine();
         }
 
         public void BlockBrace(Action writeInner)

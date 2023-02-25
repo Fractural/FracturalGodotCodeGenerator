@@ -66,6 +66,12 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
             return addition != null;
         }
 
+        public bool TryUse(EventAttributeSite site, out PartialClassAddition addition)
+        {
+            addition = Use(site);
+            return addition != null;
+        }
+
         public virtual PartialClassAddition? Use(MemberAttributeSite site)
         {
             return null;
@@ -87,6 +93,11 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
         }
 
         public virtual PartialClassAddition? Use(MethodAttributeSite site)
+        {
+            return null;
+        }
+
+        public virtual PartialClassAddition? Use(EventAttributeSite site)
         {
             return null;
         }

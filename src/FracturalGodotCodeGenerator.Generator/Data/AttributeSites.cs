@@ -25,4 +25,9 @@ namespace FracturalGodotCodeGenerator.Generator.Data
         INamedTypeSymbol Class,
         IMethodSymbol Method,
         AttributeData Attribute);
+
+    public record EventAttributeSite(
+        INamedTypeSymbol Class,
+        IEventSymbol Event,
+        AttributeData Attribute);
 }
