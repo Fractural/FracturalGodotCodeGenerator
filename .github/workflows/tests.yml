@@ -33,7 +33,7 @@ jobs:
       - name: Compile
         run: |
           cd godot
-          msbuild
+          dotnet build
 
       - name: Run
         run: |
