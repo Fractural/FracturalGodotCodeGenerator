@@ -28,7 +28,7 @@ jobs:
       - name: Remove Stub Project
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "(\r\n|\r|\n)Project(.*?)"StubProject"(.*?)(\r\n|\r|\n)EndProject"
+          find: "(\r\n|\r|\n)Project(.*?)\"StubProject\"(.*?)(\r\n|\r|\n)EndProject"
           replace: ""
           regex: true
 
