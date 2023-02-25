@@ -124,7 +124,7 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
             // Handle field name convention: _ prefix with lowercase name.
             string pathName = Member.Name.TrimStart('_');
             pathName =
-                pathName[0].ToString().ToUpperInvariant() +
+                pathName[0].ToString().ToUpper() +
                 pathName.Substring(1);
 
             SuffixlessExportPropertyName = pathName;

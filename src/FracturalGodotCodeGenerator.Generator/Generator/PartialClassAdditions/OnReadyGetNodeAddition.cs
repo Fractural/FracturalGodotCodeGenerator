@@ -20,7 +20,7 @@ namespace Fractural.GodotCodeGenerator.Generator.PartialClassAdditions
                 : "";
 
             g.Line();
-            g.Line(export, "public NodePath ", ExportPropertyName, " { get; set; }");
+            g.Line(export, "private NodePath ", ExportPropertyName, " { get; set; }");
 
             if (Path is { Length: > 0 })
             {

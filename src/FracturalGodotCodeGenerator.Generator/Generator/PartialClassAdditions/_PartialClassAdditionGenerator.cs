@@ -5,6 +5,7 @@ using FracturalGodotCodeGenerator.Generator.Util;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Editing;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,14 +27,13 @@ namespace FracturalGodotCodeGenerator.Generator
 
         public void Execute(GeneratorExecutionContext context)
         {
-//#if DEBUG
-//            if (!Debugger.IsAttached)
-//            {
-//                Debugger.Launch();
-//            }
-//#endif
+            //#if DEBUG
+            //            if (!Debugger.IsAttached)
+            //            {
+            //                Debugger.Launch();
+            //            }
+            //#endif
             executionContext = context;
-
             var receiver = context.SyntaxReceiver as SyntaxReceiver ?? throw new Exception();
             var processedSyntaxData = receiver.GenerateProcessedSyntaxData(context);
 
