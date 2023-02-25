@@ -20,6 +20,16 @@ jobs:
           mkdir -p .mono/assemblies/Debug
           cp /usr/local/bin/GodotSharp/Api/Release/* .mono/assemblies/Debug
 
+      - name: Install NET SDK
+        run: |
+          wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          apt-get update -qq
+          apt-get install -y apt-transport-https
+          apt-get update -qq
+          apt-get install -y dotnet-sdk-6.0
+
       - name: Compile
         run: |
           cd godot
